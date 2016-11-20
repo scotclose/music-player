@@ -217,7 +217,10 @@ def playPerformer(performer_id):
 def browseFiles():
     path = request.args.get('path')
     if not path:
-        path = '/Users/scotclose/Development/repositories/music-player/static'
+        # path = '/Users/scotclose/Development/repositories/music-player/static'
+        with open('music_player.json') as data_file:    
+            data = json.load(data_file)
+            path = data["music_path"]
     file_list = os.listdir(path)
     path_components = string.split(path, '/')
     return render_template('browseFiles.html',

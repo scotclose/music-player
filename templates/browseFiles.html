@@ -7,7 +7,7 @@
     <script>
      // Play the first track
     function play_track(path) {
-        // Need to remove /Users/scotclose//Development/music_player/dev from head of path
+        // Need to remove absolute (local) path from head of path
         path_start = path.indexOf('/static');
         local_path = path.substring(path_start);
         console.log("actual path: " + path);
