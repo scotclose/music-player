@@ -360,10 +360,42 @@ def playAlbum(album_id):
             album_title = album.title,
             album_year = album.year,
             album_performer = performer.name,
+            album_rating = album.rating,
             random = random)
     except:
         print "Invalid album id: %s" % album_id
         return redirect(url_for('playRandomAlbum'))
+
+# Compute album ratings
+@app.route('/album/rate_all')
+def rateAllAlbums():
+    albums = session.query(Album).all()
+    for album in albums:
+        rateAlbum(album.id)
+    return render_template('home.html')
+
+# Update the rating of an album
+@app.route('/album/<int:album_id>/rate')
+def rateAlbum(album_id):
+    rating_total = 0
+    rated_tracks = 0
+    album_rating = 0
+    try:
+        album = session.query(Album).filter_by(id = album_id).one()
+        # Get album tracks in order
+        album_tracks = session.query(Track).filter_by(album
+            = album_id).order_by(Track.track_number)
+        for track in album_tracks:
+            if track.rating > 0:
+                rated_tracks += 1
+                rating_total += track.rating
+        if rated_tracks > 0:
+            album_rating = rating_total / float(rated_tracks)
+        album.rating = album_rating
+        session.commit()
+        # print "%s, %f" % (album.title, album.rating)
+    except:
+        print "Invalid album id: %s" % album_id
 
 @app.route('/tag/')
 @app.route('/tags/')

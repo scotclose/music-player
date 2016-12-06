@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String, Date
+from sqlalchemy import Column, ForeignKey, Integer, String, Date, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -30,6 +30,7 @@ class Album(Base):
     performer = Column(Integer, ForeignKey('performer.id'))
     genre = Column(Integer, ForeignKey('genre.id'))
     tracks = relationship('Track', backref="track")
+    rating = Column(Float)
 
 class Genre(Base):
     __tablename__ = 'genre'

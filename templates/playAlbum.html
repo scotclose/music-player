@@ -158,6 +158,9 @@
     {% if album_performer %}
         <h2>{{ album_performer }} ({{ album_year}})</h2>
     {% endif %}
+    {% if album_rating %}
+        <h3>{{ album_rating }}</h3>
+    {% endif %}
     <h3 id = "playing"></h3>
     <div style = "display: flex; align-items: center;">
         <audio controls id = "audio" onended = "next_track()" ></audio>
