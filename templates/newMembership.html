@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+<!doctype html>
+<html>
+<head>
+<title>New Membership</title>
+</head>
+<body>
+    {% block left %}
+    <h1>New Membership</h1>
+    <form action="{{ url_for('newMembership') }}" method = "post">
+        <div style = "width:50%; float:left">
+            <label for = "group">Group</label><br />
+         <select size = 20 name = "group" id = "group">
+        {% for performer in performers %}
+            <option value = "{{ performer.id }}">{{ performer.sort_name }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <div style = "width:50%; float:right">
+        <label for = "members">Members</label><br />
+         <select multiple size = 20 name = "members" id = "members">
+        {% for performer in performers %}
+            <option value = "{{ performer.id }}">{{ performer.sort_name }}</option>
+        {% endfor %}
+        </select>
+    </div>
+        <input type = "submit" value = "Submit" />
+    </form>
+    {% endblock %}
+</body>
+</html>

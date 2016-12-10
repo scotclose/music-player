@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+<!doctype html>
+<html>
+<head>
+    {% block head %}
+    <title>Edit Preferences</title>
+    {% endblock %}
+</head>
+<body>
+    {% block left %}
+    <form action="{{ url_for('editPreferences') }}" method="post">
+        <p><label for="rating">Minimum rating: </label>
+            <input type = "text" name = "rating" id = "rating"  value="{{ preferences.rating_minimum }}"/></p>
+        <p><label for="recent">Minimum days since last played: </label>
+            <input type = "text" name = "recent" id = "recent"  value="{{ preferences.recent_minimum }}"/></p>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+    {% endblock %}
+</body>
+</html>

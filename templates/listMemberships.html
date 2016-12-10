@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Memberships</title>
+    <script>
+        $(function() {
+            $("#nav-organize").addClass("selected");
+        });
+    </script>
+{% endblock %}
+
+{% block navigation %}
+    <ul class="subnav">
+        <li><a href = "{{ url_for('listPerformers') }}" class = "selected">Performers</a></li>
+        <li><a href = "{{ url_for('listAlbums') }}">Albums</a></li>
+        <li><a href = "{{ url_for('listTags') }}">Tags</li>
+        <li><a href = "{{ url_for('listTracks') }}">Tracks</a></li>
+        <li><a href = "{{ url_for('listMembership') }}">Membership</a></li>
+    </ul>
+{% endblock %}
+
+{% block left %}
+    <h1>Memberships</h1>
+    <p><a href="{{ url_for('newMembership') }}"><button type="button">New</button></a></p>
+    <ul>
+    {% for membership in memberships %}
+    <li>{{ membership }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
